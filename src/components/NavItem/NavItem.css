@@ -1,0 +1,11 @@
+.nav-item {
+}
+.nav-item svg {
+    color: #fff;
+    font-size: 25px;
+}
+.nav-item p{
+    color: #fff;
+    font-size: 15px;
+    text-transform: uppercase;
+}

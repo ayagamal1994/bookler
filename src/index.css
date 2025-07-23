@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+}
+p {
+  margin-bottom: 0 !important;
+}
+a {
+  text-decoration: none !important;
+  
+}
