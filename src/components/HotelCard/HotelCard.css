@@ -55,7 +55,10 @@
 }
 .hotel-card .hotel-details .view {
     padding: 5px 10px;
-    font-size: 11px
+    font-size: 11px;
+    color: #000;
+    background-color: #eaeaeb;
+    border-radius: 20px
 }
 .hotel-card .hotel-details .book {
     padding: 5px 10px;

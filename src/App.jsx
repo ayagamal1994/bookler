@@ -7,6 +7,7 @@ function App() {
   const Login = lazy(()=> import("./pages/Login/Login"));
   const SignUp = lazy(()=> import("./pages/SignUp/SignUp"));
   const HotelsSearch = lazy(()=> import("./pages/HotelsSearch/HotelsSearch"));
+  const HotelDetails = lazy(()=> import("./pages/HotelDetails/HotelDetails"))
   return (
     <>
       <Suspense fallback={<div>Loading...</div>}>
@@ -15,6 +16,7 @@ function App() {
           <Route path="login" element={<Login />}/>
           <Route path="signup" element={<SignUp />}/>
           <Route path="hotelssearch" element={<HotelsSearch />}/>
+          <Route path="/hotelssearch/:id" element={<HotelDetails />}/>
         </Routes>
       </Suspense>
     </>

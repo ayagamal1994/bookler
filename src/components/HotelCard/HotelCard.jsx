@@ -2,6 +2,7 @@ import "./HotelCard.css";
 import Button from "../Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function HotelCard({hotel}) {
   return (
@@ -29,9 +30,7 @@ function HotelCard({hotel}) {
                         <p className="actual-price">${hotel.pricing[0].discountedPrice}</p>
                     </div>
                     <div className="buttons d-flex gap-2">
-                        <div>
-                            <Button title="view details" className="view"/>
-                        </div>
+                        <Link to={`/hotelssearch/${hotel.id}`} className="view">view more</Link>
                         <div>
                             <Button title="book now" className="book"/>
                         </div>
