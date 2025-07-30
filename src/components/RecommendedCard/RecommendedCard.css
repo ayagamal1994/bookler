@@ -31,5 +31,6 @@
 .recommended-item .rec-details .book {
     padding: 5px 10px;
     color: #DF142D;
-    background-color: #FDF1F2
+    background-color: #FDF1F2;
+    border-radius: 10px;
 }

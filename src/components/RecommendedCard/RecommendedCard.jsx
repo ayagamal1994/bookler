@@ -2,6 +2,7 @@ import "./RecommendedCard.css";
 import Button from "../Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 function RecommendedCard({hotel}) {
   return (
     <>
@@ -23,7 +24,7 @@ function RecommendedCard({hotel}) {
                         {hotel.rating.score - Math.floor(hotel.rating.score !== 0) && <FontAwesomeIcon icon={faStarHalf}/>}
                     </div>
 
-                    <Button className="book" title="book now" />
+                    <Link className="book" to={`/booking/${hotel.id}`}>book now</Link>
                 </div>
             </div>
         </div>
