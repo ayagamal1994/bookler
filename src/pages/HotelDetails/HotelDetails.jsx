@@ -136,7 +136,7 @@ function HotelDetails() {
                       <p className="discount">{hotel.pricing[0].discount}</p>
                       <div className="d-flex align-items-end">
                         <p className="c-price">
-                          {hotel.pricing[0].originalPrice}
+                          {hotel.pricing[0].discountedPrice}
                         </p>
                         <p className="currency">{hotel.pricing[0].currency}</p>
                       </div>

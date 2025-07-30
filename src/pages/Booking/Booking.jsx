@@ -285,7 +285,8 @@ function Booking() {
                           <span>Check In</span>
                           <input
                             type="date"
-                            value={initialCheckin}
+                            value={checkin}
+                            min={new Date().toISOString().split("T")[0]}
                             onChange={(e) => setCheckin(e.target.value)}
                           />
                         </div>
@@ -294,14 +295,21 @@ function Booking() {
                           <span>Check Out</span>
                           <input
                             type="date"
-                            value={initialCheckout}
+                            value={checkout}
+                            {...register("checkout", {
+                              required: "Check-out is required",
+                              validate: (value) =>
+                                !checkin || value > checkin || "Check-out must be after check-in",
+                            })}
+                            min={checkin || ""}
                             onChange={(e) => setCheckout(e.target.value)}
                           />
+                          {errors.checkout && <span style={{ color: "red" }}>{errors.checkout.message}</span>}
                         </div>
                         <hr />
                         <div className="d-flex justify-content-between">
                           <span>Price Per Night</span>
-                          <span>{hotel.pricing[0].originalPrice}</span>
+                          <span>{hotel.pricing[0].discountedPrice}</span>
                         </div>
                         <div className="d-flex justify-content-between">
                           <span>Nights</span>
@@ -309,7 +317,7 @@ function Booking() {
                         </div>
                         <div className="d-flex justify-content-between fw-bold">
                           <span>Total Price</span>
-                          <span>{hotel.pricing[0].originalPrice * nights}</span>
+                          <span>{hotel.pricing[0].discountedPrice * nights}</span>
                         </div>
                       </div>
                     </div>
