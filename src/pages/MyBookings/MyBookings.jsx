@@ -6,8 +6,7 @@ import Header from "../../components/Header/Header";
 import SideBar from "../../components/SideBar/SideBar";
 import SearchInput from "../../components/SearchInput/SearchInput";
 import Button from "../../components/Button/Button";
-// import { useLocation } from "react-router-dom";
-
+import notImage from "../../assets/images/not-found.png"
 function MyBookings() {
   const myBooking = useSelector((state) => state.booking.bookingData);
   const user = useSelector((state) => state.user.currentUser);
@@ -71,7 +70,10 @@ function MyBookings() {
                 </div>
               ))
             ) : (
-              <p>no booking found</p>
+              <div className="not-found d-flex flex-column align-items-center justify-content-center">
+                <img src={notImage} alt="not found"/>
+                <h3>no booking found</h3>
+              </div>
             )}
             </div>
             <div className="profile d-flex flex-column align-items-center">
