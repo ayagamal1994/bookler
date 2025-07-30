@@ -156,7 +156,7 @@ function HotelDetails() {
                       </div>
                     )}
                   </div>
-                  <Link to="" className="pay">
+                  <Link to={`/booking/${hotel.id}`} className="pay">
                     pay now
                   </Link>
                 </div>

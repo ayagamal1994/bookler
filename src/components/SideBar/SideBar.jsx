@@ -29,7 +29,7 @@ function SideBar() {
 
             <div className="links d-flex flex-column gap-2">
                 <NavLink to="/"><FontAwesomeIcon icon={faHome}/> {!collapsed && <span> home </span>}</NavLink>
-                {currentUser && <NavLink to="/"><FontAwesomeIcon icon={faAddressBook}/> {!collapsed && <span> my bookings </span>} </NavLink>}
+                {currentUser && <NavLink to="/mybookings"><FontAwesomeIcon icon={faAddressBook}/> {!collapsed && <span> my bookings </span>} </NavLink>}
                 <NavLink to="/"><FontAwesomeIcon icon={faEarthEurope}/> {!collapsed && <span> explore </span>} </NavLink>
                 <NavLink to="/"><FontAwesomeIcon icon={faCircleQuestion}/> {!collapsed && <span> support </span>} </NavLink>
             </div>

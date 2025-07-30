@@ -11,13 +11,15 @@ import {
   faCcDiscover,
 } from "@fortawesome/free-brands-svg-icons";
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { ApiUrl } from "../../network/interceptor/ApiUrl";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-
+import { faCircleCheck, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { setBooking } from "../../store/BookingSlice";
 
 function Booking() {
   const [hotel, setHotel] = useState(null);
+  const dispatch = useDispatch();
   const { id } = useParams();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -25,6 +27,8 @@ function Booking() {
   const checkin = searchParams.get("checkin");
   const checkout = searchParams.get("checkout");
   let nights = (new Date(checkout) - new Date(checkin))/(1000 * 60 * 60 * 24)
+  const [showPopup, setShowPopup] = useState(false);
+
 
   useEffect(() => {
     ApiUrl.get(`/hotels/${id}`).then((res) => {
@@ -39,9 +43,17 @@ function Booking() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
+  const onSubmit = () => {
+
+    dispatch(setBooking({
+      ...hotel,
+      checkin: checkin,
+      checkout: checkout,
+    }));
+    setShowPopup(true);
+    console.log("Booking data sent to Redux:", hotel);
   };
+
   return (
     <>
       <Header />
@@ -50,6 +62,15 @@ function Booking() {
         <div className="d-flex justify-content-start gap-4">
           <SideBar />
           <div className="booking">
+            {showPopup && (
+              <div className="popup-overlay">
+                <div className="popup-box d-flex flex-column align-items-center">
+                  <FontAwesomeIcon icon={faCircleCheck}/>
+                  <h3>booking success</h3>
+                  <Link to={`/mybookings?checkin=${checkin}&checkout=${checkout}`}>view all bookings</Link>
+                </div>
+              </div>
+            )}
             <SearchInput />
             <div className=" mt-5">
               <div className="row">

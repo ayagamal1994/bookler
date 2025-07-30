@@ -2,13 +2,15 @@ import { lazy, Suspense } from 'react';
 import './App.css'
 import { Route, Routes } from 'react-router-dom';
 import Booking from './pages/Booking/Booking';
+import MyBookings from './pages/MyBookings/MyBookings';
 function App() {
 
   const Home = lazy(() => import("./pages/Home/Home"));
   const Login = lazy(()=> import("./pages/Login/Login"));
   const SignUp = lazy(()=> import("./pages/SignUp/SignUp"));
   const HotelsSearch = lazy(()=> import("./pages/HotelsSearch/HotelsSearch"));
-  const HotelDetails = lazy(()=> import("./pages/HotelDetails/HotelDetails"))
+  const HotelDetails = lazy(()=> import("./pages/HotelDetails/HotelDetails"));
+  const MyBookings = lazy(()=> import("./pages/MyBookings/MyBookings"));
   return (
     <>
       <Suspense fallback={<div>Loading...</div>}>
@@ -19,6 +21,7 @@ function App() {
           <Route path="hotelssearch" element={<HotelsSearch />}/>
           <Route path="hotelssearch/:id" element={<HotelDetails />}/>
           <Route path="booking/:id" element={<Booking />}/>
+          <Route path="mybookings/" element={<MyBookings />}/>
         </Routes>
       </Suspense>
     </>

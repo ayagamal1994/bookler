@@ -2,6 +2,7 @@
     background-color: #fff;
     border-radius: 10px;
     position: relative;
+    width: 100%
 }
 .hotel-card .hotel-img{
     width: 39%;
@@ -64,6 +65,7 @@
     padding: 5px 10px;
     font-size: 11px;
     background-color: #0A6ADA;
-    color: #fff
+    color: #fff;
+    border-radius: 20px;
 }
 
