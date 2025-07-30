@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./HotelDetails.css";
 import RecommendedCard from "../../components/RecommendedCard/RecommendedCard";
 import { ApiUrl } from "../../network/interceptor/ApiUrl";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import {
   faLocationDot,
   faStar,
@@ -16,6 +16,11 @@ import SearchInput from "../../components/SearchInput/SearchInput";
 function HotelDetails() {
   const [hotel, setHotel] = useState(null);
   const { id } = useParams();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
+  const checkin = searchParams.get("checkin");
+  const checkout = searchParams.get("checkout");
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -156,7 +161,7 @@ function HotelDetails() {
                       </div>
                     )}
                   </div>
-                  <Link to={`/booking/${hotel.id}`} className="pay">
+                  <Link to={`/booking/${hotel.id}?checkin=${checkin}&checkout=${checkout}`} className="pay">
                     pay now
                   </Link>
                 </div>

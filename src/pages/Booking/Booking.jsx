@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { ApiUrl } from "../../network/interceptor/ApiUrl";
 import { faCircleCheck, faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setBooking } from "../../store/BookingSlice";
 
 function Booking() {
@@ -23,12 +23,21 @@ function Booking() {
   const { id } = useParams();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-
-  const checkin = searchParams.get("checkin");
-  const checkout = searchParams.get("checkout");
-  let nights = (new Date(checkout) - new Date(checkin))/(1000 * 60 * 60 * 24)
+  const initialCheckin = searchParams.get("checkin");
+  const initialCheckout = searchParams.get("checkout");
+  const [checkin, setCheckin] = useState(initialCheckin || "");
+  const [checkout, setCheckout] = useState(initialCheckout || "");
+  const nights =
+    checkin && checkout
+      ? Math.ceil(
+          (new Date(checkout) - new Date(checkin)) / (1000 * 60 * 60 * 24)
+        )
+    : 0;
   const [showPopup, setShowPopup] = useState(false);
 
+  const user = useSelector((state) => state.user.currentUser);
+
+    
 
   useEffect(() => {
     ApiUrl.get(`/hotels/${id}`).then((res) => {
@@ -54,6 +63,7 @@ function Booking() {
     console.log("Booking data sent to Redux:", hotel);
   };
 
+  
   return (
     <>
       <Header />
@@ -125,6 +135,7 @@ function Booking() {
                       <label>Email</label>
                       <input
                         type="email"
+                        value={user.email}
                         className="form-control"
                         {...register("email", { required: true })}
                       />
@@ -259,7 +270,7 @@ function Booking() {
                             </p>
                             <div className="d-flex align-items-end">
                               <p className="c-price">
-                                {hotel.pricing[0].originalPrice}
+                                {hotel.pricing[0].discountedPrice}
                               </p>
                               <p className="currency">
                                 {hotel.pricing[0].currency}
@@ -270,13 +281,22 @@ function Booking() {
                         </div>
 
                         <hr />
-                        <div className="d-flex justify-content-between">
+                        <div className="d-flex justify-content-between align-items-center mb-2">
                           <span>Check In</span>
-                          <span>{checkin}</span>
+                          <input
+                            type="date"
+                            value={initialCheckin}
+                            onChange={(e) => setCheckin(e.target.value)}
+                          />
                         </div>
-                        <div className="d-flex justify-content-between">
+
+                        <div className="d-flex justify-content-between align-items-center">
                           <span>Check Out</span>
-                          <span>{checkout}</span>
+                          <input
+                            type="date"
+                            value={initialCheckout}
+                            onChange={(e) => setCheckout(e.target.value)}
+                          />
                         </div>
                         <hr />
                         <div className="d-flex justify-content-between">

@@ -30,7 +30,7 @@ function HotelCard({hotel, checkin, checkout}) {
                         <p className="actual-price">${hotel.pricing[0].discountedPrice}</p>
                     </div>
                     <div className="buttons d-flex gap-2">
-                        <Link to={`/hotelssearch/${hotel.id}`} className="view">view more</Link>
+                        <Link to={`/hotelssearch/${hotel.id}?checkin=${checkin}&checkout=${checkout}`} className="view">view more</Link>
                         <Link to={`/booking/${hotel.id}?checkin=${checkin}&checkout=${checkout}`} className="book">book now</Link>
                         
                     </div>

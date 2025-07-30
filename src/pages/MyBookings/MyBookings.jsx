@@ -62,7 +62,11 @@ function MyBookings() {
                         <p>from: {hotel.checkin}</p>
                         <p>to: {hotel.checkout}</p>
                       </div>
+                      
                     </div>
+                    <div className="total">
+                        total: ${((new Date(hotel.checkout) - new Date(hotel.checkin)) / (1000 * 60 * 60 * 24)) * hotel.pricing[0].discountedPrice}
+                      </div>
                   </div>
                 </div>
               ))
