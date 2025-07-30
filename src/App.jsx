@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <Suspense fallback={<div>Loading...</div>}>
-      <BrowserRouter>
+      <BrowserRouter basename="/bookler">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="login" element={<Login />}/>
