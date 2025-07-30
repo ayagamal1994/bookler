@@ -10,10 +10,11 @@
 
 /* recommended hotels */
 .recommended-hotels {
-  width: 130%;
+  width: 100%;
   margin: 0 auto;
   overflow-x: auto;
  margin-top: 50px;
+ position: relative;
 }
 .recommended-hotels h3 {
     text-transform: capitalize;
@@ -36,9 +37,31 @@
   display: none;
 }
 .card-wrapper {
-  flex: 0 0 33.33%;
+  flex: 0 0 40%;
   scroll-snap-align: start;
   margin-right: 12px;
+}
+
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: white;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 20px;
 }
 
 /* offers */

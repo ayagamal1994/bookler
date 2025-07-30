@@ -3,12 +3,27 @@ import Header from "../../components/Header/Header";
 import SideBar from "../../components/SideBar/SideBar";
 import SearchInput from "../../components/SearchInput/SearchInput";
 import RecommendedCard from "../../components/RecommendedCard/RecommendedCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ApiUrl } from "../../network/interceptor/ApiUrl";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Home() {
   const [recommendedHotels, setRecommendedHotels] = useState(null);
   const [bestOffers, setBestOffers] = useState(null);
+
+  const carouselRef = useRef(null);
+
+  const scroll = (direction) => {
+    const { current } = carouselRef;
+    const scrollAmount = 33;
+
+    if (direction === "left") {
+      current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    } else {
+      current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
 
   //fetch recommednded hotels data
   useEffect(() => {
@@ -36,9 +51,15 @@ function Home() {
             <div className="home-content">
               <SearchInput />
 
-              <section className="recommended-hotels">
+              <section className="recommended-hotels position-relative">
                 <h3>recommended hotels</h3>
-                <div className="carousel-container d-flex overflow-auto">
+                <button className="arrow left-arrow" onClick={() => scroll("left")}>
+                  <FontAwesomeIcon icon={faChevronLeft} />
+                </button>
+                <button className="arrow right-arrow" onClick={() => scroll("right")}>
+                  <FontAwesomeIcon icon={faChevronRight} />
+                </button>
+                <div ref={carouselRef} className="carousel-container d-flex overflow-auto">
                   {recommendedHotels &&
                     recommendedHotels.map((hotel) => (
                       <div key={hotel.id} className="card-wrapper">
