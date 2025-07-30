@@ -12,11 +12,7 @@ function Login() {
     const dispatch = useDispatch();
     
     const onSubmit = (data) => {
-    const fakeUser = {
-      name: "Guest User",
-      email: data.email,
-    };
-    dispatch(setCurrentUser(fakeUser));
+    dispatch(setCurrentUser(data));
     window.location.href = "/";
   };
 

@@ -1,6 +1,6 @@
 .hotel-details {
-    width: calc(100vw - 320px);
-    margin-left: 280px;
+    flex:1;
+    min-width: 0;
 }
 .hotel-details-container {
     padding: 20px;

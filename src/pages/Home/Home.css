@@ -4,8 +4,8 @@
     overflow: hidden;
 }
 .home .home-content {
-    width: calc(100vw - 320px);
-    margin-left: 280px;
+    flex:1;
+    min-width: 0;
 }
 
 /* recommended hotels */
@@ -21,7 +21,7 @@
 }
 .carousel-container {
     
-display: flex;
+  display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-padding-left: 16px;

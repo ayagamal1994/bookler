@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-function HotelCard({hotel}) {
+function HotelCard({hotel, checkin, checkout}) {
   return (
     <>
         <div className="col-12 col-lg-6 d-flex">
@@ -31,9 +31,8 @@ function HotelCard({hotel}) {
                     </div>
                     <div className="buttons d-flex gap-2">
                         <Link to={`/hotelssearch/${hotel.id}`} className="view">view more</Link>
-                        <div>
-                            <Button title="book now" className="book"/>
-                        </div>
+                        <Link to={`/booking/${hotel.id}?checkin=${checkin}&checkout=${checkout}`} className="book">book now</Link>
+                        
                     </div>
                 </div>
             </div>

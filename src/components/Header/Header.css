@@ -11,3 +11,22 @@
     bottom: 120px;
     left: 400px
 }
+
+.header .login-sign {
+    position: absolute;
+    top: 50px;
+    right: 30px;
+}
+.header .login-sign a {
+    color: #fff;
+    font-size: 18px;
+    text-transform: capitalize;
+}
+.header .user-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+}
+.header .user-dropdown button {
+    color: #fff
+}

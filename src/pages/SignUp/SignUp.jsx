@@ -4,34 +4,25 @@ import { useForm } from "react-hook-form";
 import Button from "../../components/Button/Button";
 import plane from "../../assets/images/form-img.png";
 import logo from "../../assets/images/blue-logo.png";
+import { setCurrentUser } from "../../store/UserSlice";
+import { useDispatch } from "react-redux";
 function SignUp() {
-    const {
+  const dispatch = useDispatch();
+
+  const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-    setError,
   } = useForm();
 
   const navigate = useNavigate();
   const password = watch("password");
 
   const onSubmit = (data) => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-
-    const exists = users.find((user) => user.email === data.email);
-    if (exists) {
-      setError("email", {
-        type: "manual",
-        message: "Email is already registered",
-      });
-      return;
-    }
-
-    users.push(data);
-    localStorage.setItem("users", JSON.stringify(users));
-
-    navigate("/login");
+    //const users = JSON.parse(localStorage.getItem("users")) || [];
+        dispatch(setCurrentUser(data));
+        navigate("/login");
   };
   return (
     <>

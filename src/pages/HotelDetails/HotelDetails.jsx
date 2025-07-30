@@ -22,11 +22,12 @@ function HotelDetails() {
   const [recommendedHotels, setRecommendedHotels] = useState(null);
 
   //fetch recommednded hotels data
-  useEffect(()=>{
-    ApiUrl.get("/recommended_hotels").then((res)=>{
+  useEffect(() => {
+    ApiUrl.get("/recommended_hotels").then((res) => {
       setRecommendedHotels(res.data);
-      console.log(res.data)})
-  },[])
+      console.log(res.data);
+    });
+  }, []);
 
   const changeImage = (index) => {
     setCurrentIndex(index);
@@ -56,125 +57,126 @@ function HotelDetails() {
   return (
     <>
       <Header />
-      <SideBar />
 
-      <section className="hotel-details">
-        <SearchInput />
-        {hotel && (
-          <div className="hotel-details-container d-flex align-items-stretch justify-content-between mt-5">
-            <div className="hotel-carousel">
-              <div className="carousel-main position-relative mb-4">
-                <img
-                  key={hotel.images.gallery[currentIndex]}
-                  src={hotel.images.gallery[currentIndex]}
-                  alt="Main"
-                  className="carousel-main-img img-fluid rounded shadow"
-                />
+      <div className="container-fluid">
+        <div className="d-flex justify-content-start gap-4">
+          <SideBar />
+          <section className="hotel-details">
+            <SearchInput />
+            {hotel && (
+              <div className="hotel-details-container d-flex align-items-stretch justify-content-between mt-5">
+                <div className="hotel-carousel">
+                  <div className="carousel-main position-relative mb-4">
+                    <img
+                      key={hotel.images.gallery[currentIndex]}
+                      src={hotel.images.gallery[currentIndex]}
+                      alt="Main"
+                      className="carousel-main-img img-fluid rounded shadow"
+                    />
 
-                <button className="carousel-btn prev" onClick={prevImage}>
-                  <span className="carousel-control-prev-icon" />
-                </button>
+                    <button className="carousel-btn prev" onClick={prevImage}>
+                      <span className="carousel-control-prev-icon" />
+                    </button>
 
-                <button className="carousel-btn next" onClick={nextImage}>
-                  <span className="carousel-control-next-icon" />
-                </button>
-              </div>
-
-              <div className="carousel-thumbnails d-flex justify-content-center flex-wrap">
-                {hotel.images.gallery.map((img, index) => (
-                  <img
-                    key={index}
-                    src={img}
-                    alt={`thumb-${index}`}
-                    onClick={() => changeImage(index)}
-                    className={`carousel-thumb ${
-                      currentIndex === index ? "active" : ""
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="hotel-details-info">
-              <div className="review-price d-flex justify-content-between align-items-center">
-                <div className="review">
-                  <h4>hotel review</h4>
-                  <div className="d-flex align-items-center gap-2">
-                    <p className="score">
-                      {hotel.rating.score} <FontAwesomeIcon icon={faStar} />
-                    </p>
-                    <div>
-                      <p className="status">{hotel.rating.status}</p>
-                      <p className="count">
-                        {hotel.rating.reviewCount} reviews
-                      </p>
-                    </div>
-                    <div className="stars d-flex align-items-center">
-                      <div className="filled-stars">
-                        {[...Array(Math.floor(hotel.rating.score))].map(
-                          (_, i) => (
-                            <FontAwesomeIcon key={i} icon={faStar} />
-                          )
-                        )}
-                      </div>
-                      {hotel.rating.score -
-                        Math.floor(hotel.rating.score !== 0) && (
-                        <FontAwesomeIcon icon={faStarHalf} />
-                      )}
-                    </div>
+                    <button className="carousel-btn next" onClick={nextImage}>
+                      <span className="carousel-control-next-icon" />
+                    </button>
                   </div>
-                </div>
-                <div className="price">
-                  <p className="discount">{hotel.pricing[0].discount}</p>
-                  <div className="d-flex align-items-end">
-                    <p className="c-price">{hotel.pricing[0].originalPrice}</p>
-                    <p className="currency">{hotel.pricing[0].currency}</p>
-                  </div>
-                  <p className="unit">{hotel.pricing[0].priceUnit}</p>
-                </div>
-              </div>
-              <div className="about">
-                <h4>about</h4>
-                <p>{hotel.description}</p>
-              </div>
-              <p className="location">
-                <FontAwesomeIcon icon={faLocationDot} /> {hotel.address.street},{" "}
-                {hotel.address.city}, {hotel.address.country}
-              </p>
-              <div className="services">
-                {hotel.amenities && hotel.amenities.length > 0 && (
-                  <div className="d-flex align-items-center gap-2 flex-wrap">
-                    {hotel.amenities.map((s) => (
-                      <span key={s}>
-                        {s}
-                      </span>
+
+                  <div className="carousel-thumbnails d-flex justify-content-center flex-wrap">
+                    {hotel.images.gallery.map((img, index) => (
+                      <img
+                        key={index}
+                        src={img}
+                        alt={`thumb-${index}`}
+                        onClick={() => changeImage(index)}
+                        className={`carousel-thumb ${
+                          currentIndex === index ? "active" : ""
+                        }`}
+                      />
                     ))}
                   </div>
-                )}
-              </div>
-              <Link to="" className="pay">pay now</Link>
-            </div>
-          </div>
-        )}
+                </div>
 
-
-        <section className="recommended-hotels">
-            <h3>recommended hotels</h3>
-            <div className="carousel-container d-flex overflow-auto">
-              {recommendedHotels &&
-                recommendedHotels.map((hotel) => (
-                  <div
-                    key={hotel.id}
-                    className="card-wrapper"
-                  >
-                    <RecommendedCard hotel={hotel} />
+                <div className="hotel-details-info">
+                  <div className="review-price d-flex justify-content-between align-items-center">
+                    <div className="review">
+                      <h4>hotel review</h4>
+                      <div className="d-flex align-items-center gap-2">
+                        <p className="score">
+                          {hotel.rating.score} <FontAwesomeIcon icon={faStar} />
+                        </p>
+                        <div>
+                          <p className="status">{hotel.rating.status}</p>
+                          <p className="count">
+                            {hotel.rating.reviewCount} reviews
+                          </p>
+                        </div>
+                        <div className="stars d-flex align-items-center">
+                          <div className="filled-stars">
+                            {[...Array(Math.floor(hotel.rating.score))].map(
+                              (_, i) => (
+                                <FontAwesomeIcon key={i} icon={faStar} />
+                              )
+                            )}
+                          </div>
+                          {hotel.rating.score -
+                            Math.floor(hotel.rating.score !== 0) && (
+                            <FontAwesomeIcon icon={faStarHalf} />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="price">
+                      <p className="discount">{hotel.pricing[0].discount}</p>
+                      <div className="d-flex align-items-end">
+                        <p className="c-price">
+                          {hotel.pricing[0].originalPrice}
+                        </p>
+                        <p className="currency">{hotel.pricing[0].currency}</p>
+                      </div>
+                      <p className="unit">{hotel.pricing[0].priceUnit}</p>
+                    </div>
                   </div>
-                ))}
-            </div>
-          </section>
-      </section>
+                  <div className="about">
+                    <h4>about</h4>
+                    <p>{hotel.description}</p>
+                  </div>
+                  <p className="location">
+                    <FontAwesomeIcon icon={faLocationDot} />{" "}
+                    {hotel.address.street}, {hotel.address.city},{" "}
+                    {hotel.address.country}
+                  </p>
+                  <div className="services">
+                    {hotel.amenities && hotel.amenities.length > 0 && (
+                      <div className="d-flex align-items-center gap-2 flex-wrap">
+                        {hotel.amenities.map((s) => (
+                          <span key={s}>{s}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <Link to="" className="pay">
+                    pay now
+                  </Link>
+                </div>
+              </div>
+            )}
 
-      
+            <section className="recommended-hotels">
+              <h3>recommended hotels</h3>
+              <div className="carousel-container d-flex overflow-auto">
+                {recommendedHotels &&
+                  recommendedHotels.map((hotel) => (
+                    <div key={hotel.id} className="card-wrapper">
+                      <RecommendedCard hotel={hotel} />
+                    </div>
+                  ))}
+              </div>
+            </section>
+          </section>
+        </div>
+      </div>
     </>
   );
 }
